@@ -7,12 +7,106 @@ document.addEventListener('DOMContentLoaded', function () {
     loginForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
-    // Validação básica
-    if (validadeForm()) {
-        // Simulação de login bem-sucedido
-        alert('Login realizado com sucesso');
-        //Aqui você normalmente faria uma requisição para o servidor
-        //loginForm.subit();
-        
+        // Validação básica
+          if (validadeForm()) {
+            // Simulação de login bem-sucedido
+            alert('Login realizado com sucesso');
+            //Aqui você normalmente faria uma requisição para o servidor
+           //loginForm.subit();
+        }
+    });
+
+    // Validação em tempo real
+    emailIndupailInput.addEventListener('blur', validateEmail);
+    passwordInput.addEventListener('blur', validatePassword);
+
+    function validateForm() {
+      const isEmailValid = validateEmail();
+      const isPasswordValid = validatePassword();
+ 
+      return isEmailValid && isPasswordValid
     }
-    
+
+    function validateEmail() {
+      const email = emailInput.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+         if (email === '') {
+            showError(emailInput, 'E-mail é obrigatório');
+            return false;
+        } else if (!emailRegex.test(email)) {
+            showError(emailInput, 'E-mail inválido');
+            return false;
+        } else {
+            showSuccess (emailInput);
+            return true;
+        }
+    }
+
+function validatePassword(){
+const password = passwordInput.value.value.trim();
+
+    if (password === '') {
+
+showError (passwordInput, 'Senha é obrigatória');
+
+return false;
+
+     } else if (password.length < 6) {
+showError (passwordInput, 'Senha deve ter pelo menos 6 caracteres');
+return false;
+} else {
+showSuccess (passwordInput);
+return true;
+}
+}
+
+function showError(input, message) (
+
+Const inputGroup = input.parentElement;
+
+// Remove classes de sucesso se existirem input.classList.remove('success');
+
+// Adiciona classes de erro
+
+input.classList.add('error');
+
+// Remove mensagens de erro anteriores
+
+const existingError = inputGroup.querySelector('.error-message');
+
+if (existingError) {
+
+existingError.remove();
+
+}
+
+// Adiciona mensagem de erro
+
+const errorElement = document.createElement('div');
+
+errorElement.className = "error-message';
+
+errorElement.innerText = message;
+
+inputGroup.appendChild(errorElement);
+
+function showSuccess (input) {
+
+const inputGroup = input.parentElement;
+
+// Remove classes de erro se existirem input.classList.remove('error');
+
+// Adiciona classes de sucesso input.classList.add('success');
+
+// Remove mensagens de erro
+
+inputGroup.querySelector('.error-message'); const existingError
+
+if (existingError) {
+
+}
+
+existingError.remove();
+
+});
